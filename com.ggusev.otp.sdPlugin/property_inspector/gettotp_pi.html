@@ -19,6 +19,14 @@
         <input class="sdpi-item-value" id="secret" required type="text" onchange="onchange_secret()"
                value="" placeholder="JBSWY3DPEHPK3PXP" >
     </div>
+    <div class="sdpi-item">
+        <div class="sdpi-item-label">Output</div>
+        <select class="sdpi-item-value select" id="output" onchange="onchange_output()">
+            <option value="null"></option>
+<option selected value="Type">Type</option>
+<option value="Clipboard">Clipboard</option>
+        </select>
+    </div>
 
 </div>
 
@@ -35,6 +43,7 @@
     console.log('Property Inspector loaded', $PI);
 
         const secret_el = document.getElementById("secret")
+    const output_el = document.getElementById("output")
 
     let settings
 
@@ -48,6 +57,30 @@
         } else {
             settings["secret"] = secret_el.value
         }
+        if (settings["output"] !== undefined) {
+            let update_result = update_select_options(
+                output_el,
+                settings["output"][0],
+                settings["output"][1],
+            )
+            if (!update_result) {
+                let values_and_selected = get_select_values_and_selected(
+                    output_el,
+                )
+                settings["output"] = [
+                    values_and_selected.values,
+                    values_and_selected.selected,
+                ]
+            }
+        } else {
+            let values_and_selected = get_select_values_and_selected(
+                output_el,
+            )
+            settings["output"] = [
+                values_and_selected.values,
+                values_and_selected.selected,
+            ]
+        }
 
         $PI.setSettings(settings);
     });
@@ -60,11 +93,46 @@
         } else {
             settings["secret"] = secret_el.value
         }
+        if (settings["output"] !== undefined) {
+            let update_result = update_select_options(
+                output_el,
+                settings["output"][0],
+                settings["output"][1],
+            )
+            if (!update_result) {
+                let values_and_selected = get_select_values_and_selected(
+                    output_el,
+                )
+                settings["output"] = [
+                    values_and_selected.values,
+                    values_and_selected.selected,
+                ]
+            }
+        } else {
+            let values_and_selected = get_select_values_and_selected(
+                output_el,
+            )
+            settings["output"] = [
+                values_and_selected.values,
+                values_and_selected.selected,
+            ]
+        }
     });
 
         const onchange_secret = () => {
         console.log(secret_el.value);
         settings["secret"] = secret_el.value;
+        $PI.setSettings(settings);
+    }
+    const onchange_output = () => {
+        console.log(output_el.value);
+        let values_and_selected = get_select_values_and_selected(
+            output_el,
+        )
+        settings["output"] = [
+            values_and_selected.values,
+            values_and_selected.selected,
+        ]
         $PI.setSettings(settings);
     }
 

@@ -33,6 +33,12 @@ def main():
                     ),
                 ],
             ),
+            Select(
+                uid="output",
+                label="Output",
+                values=["Type", "Clipboard", ],
+                default_value="Type",
+            ),
         ]
     )
     pi.build(output_dir=OUTPUT_DIR, template=TEMPLATE)
