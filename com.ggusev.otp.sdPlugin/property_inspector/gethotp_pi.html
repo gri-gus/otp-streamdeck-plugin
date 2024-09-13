@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <title>com.ggusev.otp.gethotp Property Inspector</title>
-    <link rel="stylesheet" href="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/css/sdpi.css"/>
+    <link rel="stylesheet" href="streamdeck-javascript-sdk/css/sdpi.css"/>
 </head>
 
 <body>
@@ -18,6 +18,11 @@
         <div class="sdpi-item-label">Secret</div>
         <input class="sdpi-item-value" id="secret" required type="text" onchange="onchange_secret()"
                value="" placeholder="JBSWY3DPEHPK3PXP" >
+    </div>
+    <div class="sdpi-item">
+        <div class="sdpi-item-label">Initial count</div>
+        <input class="sdpi-item-value" id="initial_count" required type="text" onchange="onchange_initial_count()"
+               value="0" placeholder="0" pattern="^\d*$">
     </div>
     <div type="checkbox" class="sdpi-item">
         <div class="sdpi-item-label">Auto increase</div>
@@ -35,18 +40,19 @@
 </div>
 
 <!-- Stream Deck Libs -->
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/constants.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/prototypes.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/timers.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/utils.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/events.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/api.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/property-inspector.js"></script>
-<script src="../com.ggusev.otp.sdPlugin/property_inspector/streamdeck-javascript-sdk/js/dynamic-styles.js"></script>
+<script src="streamdeck-javascript-sdk/js/constants.js"></script>
+<script src="streamdeck-javascript-sdk/js/prototypes.js"></script>
+<script src="streamdeck-javascript-sdk/js/timers.js"></script>
+<script src="streamdeck-javascript-sdk/js/utils.js"></script>
+<script src="streamdeck-javascript-sdk/js/events.js"></script>
+<script src="streamdeck-javascript-sdk/js/api.js"></script>
+<script src="streamdeck-javascript-sdk/js/property-inspector.js"></script>
+<script src="streamdeck-javascript-sdk/js/dynamic-styles.js"></script>
 <script>
     console.log('Property Inspector loaded', $PI);
 
         const secret_el = document.getElementById("secret")
+    const initial_count_el = document.getElementById("initial_count")
     const auto_increase_el = document.getElementById("auto_increase")
 
     let settings
@@ -60,6 +66,11 @@
             secret_el.value = settings.secret
         } else {
             settings["secret"] = secret_el.value
+        }
+        if (settings["initial_count"] !== undefined) {
+            initial_count_el.value = settings.initial_count
+        } else {
+            settings["initial_count"] = initial_count_el.value
         }
         if (settings["auto_increase"] !== undefined) {
             auto_increase_el.checked = settings.auto_increase
@@ -78,6 +89,11 @@
         } else {
             settings["secret"] = secret_el.value
         }
+        if (settings["initial_count"] !== undefined) {
+            initial_count_el.value = settings.initial_count
+        } else {
+            settings["initial_count"] = initial_count_el.value
+        }
         if (settings["auto_increase"] !== undefined) {
             auto_increase_el.checked = settings.auto_increase
         } else {
@@ -88,6 +104,11 @@
         const onchange_secret = () => {
         console.log(secret_el.value);
         settings["secret"] = secret_el.value;
+        $PI.setSettings(settings);
+    }
+    const onchange_initial_count = () => {
+        console.log(initial_count_el.value);
+        settings["initial_count"] = initial_count_el.value;
         $PI.setSettings(settings);
     }
     const onchange_auto_increase = () => {

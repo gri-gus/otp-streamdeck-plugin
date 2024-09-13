@@ -22,14 +22,37 @@
       ],
       "Tooltip": "Generate Time-based OTP",
       "UserTitleEnabled": true
+    },
+    {
+      "UUID": "com.ggusev.otp.gethotp",
+      "Icon": "assets/gethotp/action_icon",
+      "Name": "HOTP",
+      "States": [
+        {
+          "Image": "assets/gethotp/key_icon",
+          "Name": "base",
+          "TitleColor": "#FFFFFF",
+          "TitleAlignment": "bottom",
+          "FontFamily": "Microsoft Sans Serif",
+          "FontSize": "13"
+        }
+      ],
+      "DisableAutomaticStates": true,
+      "PropertyInspectorPath": "property_inspector/gethotp_pi.html",
+      "SupportedInMultiActions": true,
+      "Controllers": [
+        "Keypad"
+      ],
+      "Tooltip": "Generate Counter-based OTP",
+      "UserTitleEnabled": true
     }
   ],
   "Author": "Grigoriy Gusev",
   "CodePath": "run.sh",
-  "Description": "Plugin for generating OTP keys",
+  "Description": "Plugin for generating OTPs",
   "Icon": "assets/plugin_icon",
   "Name": "OTP",
-  "Version": "0.0.3",
+  "Version": "1.0.0",
   "SDKVersion": 2,
   "OS": [
     {
