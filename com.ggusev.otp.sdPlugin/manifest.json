@@ -1,0 +1,51 @@
+{
+  "Actions": [
+    {
+      "UUID": "com.ggusev.otp.gettotp",
+      "Icon": "assets/gettotp/action_icon",
+      "Name": "TOTP",
+      "States": [
+        {
+          "Image": "assets/gettotp/key_icon",
+          "Name": "base",
+          "TitleColor": "#FFFFFF",
+          "TitleAlignment": "bottom",
+          "FontFamily": "Microsoft Sans Serif",
+          "FontSize": "13"
+        }
+      ],
+      "DisableAutomaticStates": true,
+      "PropertyInspectorPath": "property_inspector/gettotp_pi.html",
+      "SupportedInMultiActions": true,
+      "Controllers": [
+        "Keypad"
+      ],
+      "Tooltip": "Generate Time-based OTP",
+      "UserTitleEnabled": true
+    }
+  ],
+  "Author": "Grigoriy Gusev",
+  "CodePath": "run.sh",
+  "Description": "Plugin for generating OTP keys",
+  "Icon": "assets/plugin_icon",
+  "Name": "OTP",
+  "Version": "0.0.3",
+  "SDKVersion": 2,
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.14"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "6"
+  },
+  "Category": "Authorization",
+  "CategoryIcon": "assets/authorization_category_icon",
+  "CodePathMac": "run.sh",
+  "CodePathWin": "run.bat"
+}
