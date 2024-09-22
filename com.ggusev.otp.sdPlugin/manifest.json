@@ -52,7 +52,7 @@
   "Description": "Plugin for generating OTPs",
   "Icon": "assets/plugin_icon",
   "Name": "OTP",
-  "Version": "1.0.1",
+  "Version": "1.0.2",
   "SDKVersion": 2,
   "OS": [
     {

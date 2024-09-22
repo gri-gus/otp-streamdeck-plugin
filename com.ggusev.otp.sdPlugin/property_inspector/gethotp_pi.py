@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from streamdeck_sdk.property_inspector import *
+from streamdeck_sdk_pi import *
 
 OUTPUT_DIR = Path(__file__).parent
 TEMPLATE = Path(__file__).parent / "pi_template.html"
