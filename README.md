@@ -9,6 +9,12 @@
 
 Stream Deck plugin for generating one-time passwords, like in Google Authenticator.
 
+**TOTP Property Inspector
+preview:** [click](https://htmlpreview.github.io/?https://github.com/gri-gus/otp-streamdeck-plugin/blob/main/com.ggusev.otp.sdPlugin/property_inspector/gettotp_pi.html)
+
+**HOTP Property Inspector
+preview:** [click](https://htmlpreview.github.io/?https://github.com/gri-gus/otp-streamdeck-plugin/blob/main/com.ggusev.otp.sdPlugin/property_inspector/gethotp_pi.html)
+
 ## Requirements
 
 **Operating systems:**
