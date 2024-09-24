@@ -40,24 +40,28 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%PYTHON_COMMAND% -V`) DO SET PYTHON_VERSION=
 echo "%PYTHON_VERSION%"
 
 IF "%PYTHON_VERSION%" == "" (
-echo "bad python"
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%PYTHON_OK_VERSION% not installed', 'StreamDeck \"%PLUGIN_NAME%\" plugin ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-exit
+    echo "bad python"
+    powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%PYTHON_OK_VERSION% not installed', 'Stream Deck plugin \"%PLUGIN_NAME%\" ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+    exit
 )
 
 IF NOT "%PYTHON_VERSION:~0,8%" == "%PYTHON_OK_VERSION%" (
-echo "bad python"
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%PYTHON_OK_VERSION% not installed', 'StreamDeck \"%PLUGIN_NAME%\" plugin ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-exit
+    echo "bad python"
+    powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%PYTHON_OK_VERSION% not installed', 'Stream Deck plugin \"%PLUGIN_NAME%\" ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
+    exit
 )
 
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PYTHON_COMMAND% "%PYTHON_INIT_PATH%"`) DO SET INIT_RESULT=%%F
 echo "%INIT_RESULT%"
 
-IF NOT "%INIT_RESULT%" == "True" (
-echo "bad python"
-powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%INIT_RESULT%', 'StreamDeck \"%PLUGIN_NAME%\" plugin ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Information);}"
-exit
+if "%INIT_RESULT%" neq "True" if "%INIT_RESULT%" neq "False" (
+    echo "init error"
+    powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%INIT_RESULT%', 'Stream Deck plugin \"%PLUGIN_NAME%\" ERROR', 'OK', [System.Windows.Forms.MessageBoxIcon]::Error);}"
+    exit
+)
+if "%INIT_RESULT%" equ "False" (
+    echo "init result = False"
+    exit
 )
 
 SET PYTHONPATH="%PLUGIN_CODE_DIR_PATH%"

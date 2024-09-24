@@ -39,7 +39,7 @@ echo $PYTHON_VERSION
 
 if [[ $PYTHON_VERSION != $PYTHON_OK_VERSION* ]]; then
   echo "bad python"
-  python_error_massage="StreamDeck '${PLUGIN_NAME}' plugin ERROR\n\n${PYTHON_OK_VERSION} not installed"
+  python_error_massage="Stream Deck plugin '${PLUGIN_NAME}' ERROR\n\n${PYTHON_OK_VERSION} not installed"
   osascript -e "display dialog \"${python_error_massage}\""
   exit
 fi
@@ -47,10 +47,14 @@ fi
 INIT_RESULT=$(${PYTHON_COMMAND} "${PYTHON_INIT_PATH}")
 echo $INIT_RESULT
 
-if [ "$INIT_RESULT" != "True" ]; then
-  echo "bad python"
-  python_error_massage="StreamDeck '${PLUGIN_NAME}' plugin ERROR\n\n${INIT_RESULT}"
+if [ "$INIT_RESULT" != "True" ] && [ "$INIT_RESULT" != "False" ]; then
+  echo "init error"
+  python_error_massage="Stream Deck plugin '${PLUGIN_NAME}' ERROR\n\n${INIT_RESULT}"
   osascript -e "display dialog \"${python_error_massage}\""
+  exit
+fi
+if [ "$INIT_RESULT" == "False" ]; then
+  echo "init result = False"
   exit
 fi
 
@@ -58,4 +62,3 @@ export PYTHONPATH="${PLUGIN_CODE_DIR_PATH}"
 echo $PYTHONPATH
 
 "${PLUGIN_CODE_VENV_PYTHON}" "${PLUGIN_CODE_PATH}" "$@"
-osascript -e "display dialog \"$@\""
